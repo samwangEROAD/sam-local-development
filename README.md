@@ -10,11 +10,16 @@ script extracts your AWS credentials from `~/.aws/credentials` so you must first
 assume an AWS role, which can be done using
 [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role).
 
+## Prerequisites
+* openjdk
+* [jq](https://stedolan.github.io/jq)
+* [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role)
+* [configuration-cmd](https://github.com/eroad/configuration-cmd)
+
 ## Usage example
 
-```
-cd portal
+```bash
 okta-awscli
-...
-./start.sh
+cd portal
+../start.sh
 ```
