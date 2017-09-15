@@ -8,4 +8,6 @@ $(grep -ve "^$" -ve "^#"  ~/.aws/credentials \
 			print "export " toupper($1) "=" $2
 	}')
 
+export AWS_DEFAULT_REGION=ap-southeast-2
+$(aws ecr get-login --no-include-email)
 docker-compose up
