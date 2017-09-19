@@ -11,7 +11,8 @@ assume an AWS role, which can be done using
 [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role).
 
 ## Prerequisites
-* openjdk
+* [AWS Command Line Interface](https://aws.amazon.com/cli/)
+* OpenJDK
 * [jq](https://stedolan.github.io/jq)
 * [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role)
 * [configuration-cmd](https://github.com/eroad/configuration-cmd)

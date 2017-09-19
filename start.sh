@@ -1,6 +1,15 @@
 #!/bin/bash
+
+set -e
+
+if [[ "$(uname)" == 'Linux' ]]; then
+	AWK=awk
+elif [[ "$(uname)" == 'Darwin' ]]; then
+	AWK=gawk
+fi
+
 $(grep -ve "^$" -ve "^#"  ~/.aws/credentials \
-	| awk -F ' *= *' \
+	| ${AWK} -F ' *= *' \
 	'{
 		if ($1 ~ /^\[/)
 			section=$1;

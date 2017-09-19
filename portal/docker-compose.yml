@@ -15,8 +15,9 @@ services:
         ipv4_address: 172.19.1.2
     links:
       - memcached:memcached
-    volumes:
-      - ${HOME}/eroad/application/portal/portal/target/Portal-0-SNAPSHOT.war:/usr/local/tomcat/webapps/Portal.war
+# uncomment to deploy locally built portal war
+#    volumes:
+#      - ${HOME}/eroad/application/portal/portal/target/Portal-0-SNAPSHOT.war:/usr/local/tomcat/webapps/Portal.war
 
   memcached:
     image: memcached
