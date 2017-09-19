@@ -18,4 +18,4 @@ DB_HOST="$(echo "${PROPERTIES}" | jq -r '."dvir.jdbc.admin.url"' | sed 's#jdbc:p
 DB_USER="$(echo "${PROPERTIES}" | jq -r '."dvir.jdbc.admin.username"')"
 DB_PASS="$(echo "${PROPERTIES}" | jq -r '."dvir.jdbc.admin.password"')"
 
-PGPASSWORD=${DB_PASS} pg_dump -h "${DB_HOST}" -U "${DB_USER}" dvir > dvir.dump
+PGPASSWORD=${DB_PASS} pg_dump -F t -h "${DB_HOST}" -U "${DB_USER}" dvir > dvir-dump.tar

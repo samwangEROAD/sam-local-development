@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 if [[ "$(uname)" == 'Linux' ]]; then
 	AWK=awk
 elif [[ "$(uname)" == 'Darwin' ]]; then
