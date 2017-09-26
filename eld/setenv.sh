@@ -1,0 +1,1 @@
+JAVA_OPTS="-Djava.awt.headless=true -Xms484M -Xmx968M -XX:MetaspaceSize=256M -XX:MaxMetaspaceSize=768M -XX:CompressedClassSpaceSize=171M -XX:+UnlockDiagnosticVMOptions -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"

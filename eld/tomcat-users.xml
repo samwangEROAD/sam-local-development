@@ -1,0 +1,14 @@
+<?xml version=‘1.0’ encoding=‘utf-8’?>
+
+<tomcat-users>
+  <!-- Roles configured on this Tomcat instance that can be assigned to users -->
+  <role rolename=“admin-gui”/>
+  <role rolename=“admin-script”/>
+  <role rolename=“manager-gui”/>
+  <role rolename=“manager-script”/>
+  <role rolename=“manager-jmx”/>
+  <role rolename=“manager-status”/>
+
+ <!-- Users configured on this Tomcat instance -->
+  <user username=“admin” password=“admin” roles=“admin-gui,admin-script,manager-gui,manager-script,manager-jmx,manager-status”/>
+</tomcat-users>
