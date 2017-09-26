@@ -1,29 +1,29 @@
 version: '3'
 
 services:
-  dvir:
+  eld:
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_DYNAMODB_TABLE_PROPERTY: devConfigurationDynamoTableProperties
       AWS_REGION: ap-southeast-2
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
-    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/dvir
-    links:
-      - dvirdb:dvir-rds.dev.erdmg.com
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/eld
+    # links:
+    #   - elddb:eld-rds.dev.erdmg.com
     networks:
       app_net:
         ipv4_address: 172.19.1.98
-# uncomment to deploy locally built dvir war
+# uncomment to deploy locally built eld war
 #    volumes:
-#      - ${HOME}/eroad/application/components/inspection/dvir-war/target/dvir-war-0-SNAPSHOT.war
+#      - ${HOME}/eroad/application/components/eld/eld-war/target/eld-war-0-SNAPSHOT.war
 
 
-  dvirdb:
-    image: postgres
-    networks:
-      app_net:
-        ipv4_address: 172.19.1.97
+  # elddb:
+  #   image: postgres
+  #   networks:
+  #     app_net:
+  #       ipv4_address: 172.19.1.97
 
   memcached:
     image: memcached
@@ -42,7 +42,7 @@ services:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal
     links:
       - memcached:memcached
-      - dvir:dvir-svc.dev.erdmg.com
+      - eld:eld-svc.dev.erdmg.com:8080
     networks:
       app_net:
         ipv4_address: 172.19.1.2
