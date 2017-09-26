@@ -15,7 +15,7 @@ services:
       app_net:
         aliases:
           - eld
-          - eld-svc.dev.erdmg.com
+        ipv4_address: 172.19.1.5
 # uncomment to deploy locally built eld war
 #    volumes:
 #      - ${HOME}/eroad/application/components/eld/eld-war/target/eld-war-0-SNAPSHOT.war
@@ -59,6 +59,7 @@ services:
       app_net:
         aliases:
           - nginx
+          - eld-svc.dev.erdmg.com
         ipv4_address: 172.19.1.2
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
