@@ -18,7 +18,7 @@ services:
         ipv4_address: 172.19.1.20
 # uncomment to deploy locally built eld war
     volumes:
-      - ${HOME}/eroad/application/components/eld/eld-war/target/eld-war-0-SNAPSHOT.war
+      - ${HOME}/eroad/application/components/eld/eld-war/target/eld-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/eld.war
       - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
 
 
