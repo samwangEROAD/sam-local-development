@@ -16,17 +16,10 @@ services:
     networks:
       app_net:
         ipv4_address: 172.19.1.17
-# uncomment to deploy locally built eld war
+
     volumes:
       - ${HOME}/eroad/application/components/customer-api/customer-api-war/target/customer-api-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/customer-api.war
       - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-
-
-  # elddb:
-  #   image: postgres
-  #   networks:
-  #     app_net:
-  #       ipv4_address: 172.19.1.97
 
   memcached:
     image: memcached
