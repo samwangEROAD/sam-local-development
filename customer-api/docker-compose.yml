@@ -18,7 +18,7 @@ services:
         ipv4_address: 172.19.1.17
 
     volumes:
-      - ${HOME}/eroad/application/components/customer-api/customer-api-war/target/customer-api-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/customer-api.war
+      - ${HOME}/eroad/application/components/customer-api/customer-api-war/target/CustomerApi-0-SNAPSHOT.war:/usr/local/tomcat/webapps/CustomerApi.war
       - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
 
   memcached:
