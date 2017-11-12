@@ -12,6 +12,7 @@ assume an AWS role, which can be done using
 
 ## Prerequisites
 * [AWS Command Line Interface](https://aws.amazon.com/cli/)
+* [Docker](https://www.docker.com/)
 * OpenJDK
 * [jq](https://stedolan.github.io/jq)
 * [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role)
@@ -20,7 +21,15 @@ assume an AWS role, which can be done using
 ## Usage example
 
 ```bash
-okta-awscli
+./get-login.sh
 cd portal
 ../start.sh
+```
+
+# Troubleshooting
+
+## Adding user to docker group
+```
+sudo gpasswd --add ${USER} docker
+newgrp docker
 ```
