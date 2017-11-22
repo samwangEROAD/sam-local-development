@@ -33,3 +33,24 @@ cd portal
 sudo gpasswd --add ${USER} docker
 newgrp docker
 ```
+## Mapping ports on Mac
+If you are having trouble accessing your portal instance, try adding a port mapping on **local-development/portal/docker-compose.yml**:
+```
+services:
+  portal:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal
+    environment:
+      ...
+    networks:
+      app_net:
+        ipv4_address: 172.19.1.2
+    links:
+      - memcached:memcached
+    ports:
+      - 80:8080
+    ...
+```
+After that, you should be able to navegate to http://localhost and everything should be fine!
+
+If you feel like you could use some adrenaline in your day, you could try this:
+https://github.com/AlmirKadric-Published/docker-tuntap-osx
