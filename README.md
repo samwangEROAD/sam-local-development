@@ -13,6 +13,7 @@ assume an AWS role, which can be done using
 ## Prerequisites
 * [AWS Command Line Interface](https://aws.amazon.com/cli/)
 * [Docker](https://www.docker.com/)
+* [Docker Compose] (https://docs.docker.com/compose/install/#install-compose) (The latest version)
 * OpenJDK
 * [jq](https://stedolan.github.io/jq)
 * [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role)
