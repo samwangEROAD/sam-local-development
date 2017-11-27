@@ -38,6 +38,20 @@ newgrp docker
 
 If when running start.sh a load of exceptions are thrown showing "host is unreachable" and others, make sure nothing else (like virtualbox) is running on the IP address specified in the docker-compose.yml file. If so, change these IP addresses in docker-compose.yml.
 
+## Creating network "something_app_net" with driver "bridge"
+
+Where something is the name of a component/folder eg eld. If you're trying to start local-development in a different folder (eg, you started it in portal but are now working in eld) you will need to delete the previous docker network app_net.
+
+```
+docker network ls
+```
+Will show a network with the name something_app_net which you will need to delete.
+
+```
+docker network rm something_app_net
+```
+Will remove the conflicting network. You should be able to run start.sh successfully afterwards.
+
 
 ## Mapping ports on Mac
 If you are having trouble accessing your portal instance, try adding a port mapping on **local-development/portal/docker-compose.yml**:
