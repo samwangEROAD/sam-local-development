@@ -36,7 +36,7 @@ newgrp docker
 ```
 ## Host is unreachable 
 
-If when running start.sh a load of exceptions are thrown showing "host is unreachable" and others, make sure nothing else (like virtualbox) is running on the IP address specified in the start.sh file. If so, change these IP addresses in start.sh.
+If when running start.sh a load of exceptions are thrown showing "host is unreachable" and others, make sure nothing else (like virtualbox) is running on the IP address specified in the docker-compose.yml file. If so, change these IP addresses in docker-compose.yml.
 
 
 ## Mapping ports on Mac
