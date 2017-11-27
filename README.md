@@ -34,6 +34,11 @@ cd portal
 sudo gpasswd --add ${USER} docker
 newgrp docker
 ```
+## Host is unreachable 
+
+If when running start.sh a load of exceptions are thrown showing "host is unreachable" and others, make sure nothing else (like virtualbox) is running on the IP address specified in the start.sh file. If so, change these IP addresses in start.sh.
+
+
 ## Mapping ports on Mac
 If you are having trouble accessing your portal instance, try adding a port mapping on **local-development/portal/docker-compose.yml**:
 ```
