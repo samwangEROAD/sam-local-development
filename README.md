@@ -27,6 +27,13 @@ cd portal
 ../start.sh
 ```
 
+### Selecting development environment
+Local Development is set to use the DEV environment as default. This can be changed using the DEPOT_ENVIRONMENT variable before running the start.sh script. Example:
+```bash
+export DEPOT_ENVIRONMENT=test
+../start.sh
+```
+
 # Troubleshooting
 
 ## Adding user to docker group
@@ -70,7 +77,7 @@ services:
       - 80:8080
     ...
 ```
-After that, you should be able to navegate to http://localhost and everything should be fine!
+After that, you should be able to navigate to http://127.0.0.1 and everything should be fine!
 
 If you feel like you could use some adrenaline in your day, you could try this:
 https://github.com/AlmirKadric-Published/docker-tuntap-osx
