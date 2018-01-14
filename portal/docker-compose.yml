@@ -5,7 +5,7 @@ services:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal
     environment:
       AWS_REGION: ap-southeast-2
-      AWS_DYNAMODB_TABLE_PROPERTY: devConfigurationDynamoTableProperties
+      AWS_DYNAMODB_TABLE_PROPERTY: ${DEPOT_ENVIRONMENT}ConfigurationDynamoTableProperties
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
