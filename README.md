@@ -27,7 +27,7 @@ cd portal
 ../start.sh
 ```
 
-## Selecting development environment
+### Selecting development environment
 Local Development is set to use the DEV environment as default. This can be changed using the DEPOT_ENVIRONMENT variable before running the start.sh script. Example:
 ```bash
 export DEPOT_ENVIRONMENT=test
