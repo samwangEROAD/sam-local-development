@@ -63,7 +63,7 @@ Will remove the conflicting network. You should be able to run start.sh successf
 ## Mapping ports on Mac
 If you are having trouble accessing your portal instance, try adding a mapping for port 8080 to local port 80 in the docker-compose.yml file (e.g. **local-development/portal/docker-compose.yml**).
 
-To access the remove JVM for debugging, also add a mapping for port 8000.
+To access the remote JVM for debugging, also add a mapping for port 8000.
 ```
 services:
   portal:
