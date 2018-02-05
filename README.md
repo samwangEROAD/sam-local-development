@@ -61,7 +61,9 @@ Will remove the conflicting network. You should be able to run start.sh successf
 
 
 ## Mapping ports on Mac
-If you are having trouble accessing your portal instance, try adding a port mapping on **local-development/portal/docker-compose.yml**:
+If you are having trouble accessing your portal instance, try adding a mapping for port 8080 to local port 80 in the docker-compose.yml file (e.g. **local-development/portal/docker-compose.yml**).
+
+To access the remove JVM for debugging, also add a mapping for port 8000.
 ```
 services:
   portal:
@@ -75,6 +77,7 @@ services:
       - memcached:memcached
     ports:
       - 80:8080
+      - 8000:8000
     ...
 ```
 After that, you should be able to navigate to http://127.0.0.1 and everything should be fine!
