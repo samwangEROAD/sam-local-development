@@ -34,6 +34,17 @@ export DEPOT_ENVIRONMENT=test
 ../start.sh
 ```
 
+### Expose portal to network (linux only)
+
+Run ./expose.sh to allow others on the network to access your portal.
+
+If you are getting the error: Access Denied (publickey) try solving by running
+
+```
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+
 # Troubleshooting
 
 ## Adding user to docker group
