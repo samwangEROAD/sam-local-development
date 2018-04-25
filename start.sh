@@ -2,9 +2,8 @@
 
 set -e
 
-if [[ "$(uname)" == 'Linux' ]]; then
-	AWK=awk
-elif [[ "$(uname)" == 'Darwin' ]]; then
+AWK=awk
+if [[ "$(uname)" == 'Darwin' ]]; then
 	AWK=gawk
 fi
 
