@@ -37,7 +37,7 @@ jobs:
     - get: version
       params: {bump: patch}
   - task: build
-    file: docdepot/build/tasks/build-docdepot
+    file: docdepot/build/tasks/build-docdepot.yml
     input_mapping: {repo: docdepot}
   - aggregate:
     - put: github-release
