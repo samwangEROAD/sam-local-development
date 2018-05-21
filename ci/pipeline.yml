@@ -1,0 +1,50 @@
+resources:
+
+- name: docdepot
+  type: git
+  source:
+    uri: https://github.com/eroad/local-development.git
+    branch: master
+    username: {{github-username}}
+    password: {{github-password}}
+    ignore_paths: ['docdepot/*']
+
+- name: github-release
+  type: github-release
+  source:
+    access_token: {{github-token}}
+    user: eroad
+    repository: local-development
+
+- name: version
+  type: semver
+  source:
+    initial_version: 1.0.0
+    key: docdepot/version
+    bucket: eroad-artifact-ap-southeast-2
+    access_key_id: {{aws-access-key}}
+    secret_access_key: {{aws-secret-key}}
+    region_name: ap-southeast-2
+
+jobs:
+
+- name: build-docdepot
+  serial: true
+  plan:
+  - aggregate:
+    - get: docdepot
+      trigger: true
+    - get: version
+      params: {bump: patch}
+  - task: build
+    file: repo/build/tasks/build-docdepot
+    input_mapping: {repo: docdepot}
+  - aggregate:
+    - put: github-release
+      params:
+        commitish: docdepot/.git/refs/heads/master
+        globs: ['output/docdepot']
+        name: version/number
+        tag: version/number
+    - put: version
+      params: {file: version/number}

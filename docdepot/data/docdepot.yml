@@ -1,0 +1,145 @@
+version: "2"
+
+services:
+  nginx:
+    image: nginx
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.2
+
+  memcached:
+    image: memcached
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.100
+
+  portal:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal
+    depends_on:
+      - memcached
+    environment:
+      JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211
+    labels:
+      docdepot.hostnames: depot.local.eroad.io
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.101
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/Portal/0-SNAPSHOT/Portal-0-SNAPSHOT.war:/usr/local/tomcat/webapps/Portal.war
+
+  customer-api:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/customer-api
+    labels:
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.104
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/customer-api-war/0-SNAPSHOT/customer-api-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/CustomerApi.war
+
+  driver:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/driver
+    labels:
+      docdepot.hostnames: driver.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.110
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/driver-war/0-SNAPSHOT/driver-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/driver.war
+
+  dvir-rds:
+    image: postgres:9.5.6
+    networks:
+      docdepot:
+        aliases:
+          - dvir-rds.dev.erdmg.com
+        ipv4_address: 172.19.1.102
+
+  dvir:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/dvir
+    labels:
+      docdepot.hostnames: dvir-svc.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.103
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/dvir-war/0-SNAPSHOT/dvir-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/dvir.war
+
+  eld:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/eld
+    labels:
+      docdepot.hostnames: eld-svc.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.105
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/eld-war/0-SNAPSHOT/eld-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/eld.war
+
+  eld-rds:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ci/postgres
+    networks:
+      docdepot:
+        aliases:
+          - eld-rds.dev.erdmg.com
+        ipv4_address: 172.19.1.106
+
+  event-api:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/event-api
+    labels:
+      docdepot.hostnames: event-api-svc.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.108
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/event-api-war/0-SNAPSHOT/event-api-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/event-api.war
+
+  geographic:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/geographic
+    labels:
+      docdepot.hostnames: geographic-svc.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.109
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/geographic-war/0-SNAPSHOT/geographic-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/geographic.war
+
+  maintenance:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/maintenance
+    labels:
+      docdepot.hostnames: maintenance-svc.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.107
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/maintenance-war/0-SNAPSHOT/maintenance-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/maintenance.war
+
+  postgres:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ci/postgres
+    networks:
+      docdepot:
+        aliases:
+          - dbdepotactive.dev.erdmg.com
+        ipv4_address: 172.19.1.5
+
+  rabbitmq:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ci/rabbitmq
+    networks:
+      docdepot:
+        aliases:
+          - rabbitmq.dev.erdmg.com
+        ipv4_address: 172.19.1.64
+
+networks:
+  docdepot:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.1.0/24
+      driver: default
