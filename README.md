@@ -5,9 +5,9 @@ EROADs applications locally so that changes can be verified before merging.
 
 ## Structure
 
-Each directory contains a `docker-compose.yml` and a `start.sh`. The `start.sh`
-script extracts your AWS credentials from `~/.aws/credentials` so you must first
-assume an AWS role, which can be done using
+Each directory contains a `docker-compose.yml`. The `start.sh` script at the root of repository
+extracts your AWS credentials from `~/.aws/credentials`, so you must first
+assume an AWS role using
 [okta-aws-cli-assume-role](https://github.com/eroad/okta-aws-cli-assume-role).
 
 ## Prerequisites
