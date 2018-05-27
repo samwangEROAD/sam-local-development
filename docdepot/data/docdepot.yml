@@ -7,18 +7,35 @@ services:
       docdepot:
         ipv4_address: 172.19.1.2
 
+  mail:
+    image: mailhog/mailhog:latest
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.41
+
   memcached:
     image: memcached
     networks:
       docdepot:
         ipv4_address: 172.19.1.100
 
+  app:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/glassfish3-app-node
+    depends_on:
+      - mail
+    labels:
+      docdepot.glassfish: "true"
+      docdepot.hostnames: central-svc.dev.erdmg.com
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.25
+
   portal:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal
     depends_on:
       - memcached
     environment:
-      JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211
+      - JAVA_OPTS=-DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211
     labels:
       docdepot.hostnames: depot.local.eroad.io
       docdepot.tomcat: "true"
