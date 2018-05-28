@@ -92,6 +92,10 @@ func generate(template string, containers []string) (string) {
 			sc.Labels = map[string]string{}
 		}
 
+		if sc.Labels["docdepot.glassfish"] == "true" {
+			sc.Environment = append(sc.Environment, "DEBUG_GLASSFISH=true")
+		}
+
 		if sc.Labels["docdepot.tomcat"] == "true" {
 			javaOptsIndex := -1
 
@@ -106,7 +110,9 @@ func generate(template string, containers []string) (string) {
 			} else {
 				sc.Environment[javaOptsIndex] += " -Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n"
 			}
+		}
 
+		if sc.Labels["docdepot.glassfish"] == "true" || sc.Labels["docdepot.tomcat"] == "true" {
 			sc.Environment = append(sc.Environment, "AWS_DYNAMODB_TABLE_PROPERTY=devConfigurationDynamoTableProperties")
 			sc.Environment = append(sc.Environment, "AWS_REGION=ap-southeast-2")
 
@@ -114,7 +120,7 @@ func generate(template string, containers []string) (string) {
 				sc.Volumes = &yaml.Volumes{Volumes: []*yaml.Volume{}}
 			}
 
-			sc.Volumes.Volumes = append(sc.Volumes.Volumes, &yaml.Volume{Source: "~/.aws/credentials", Destination: "/root/.aws/credentials"})
+			sc.Volumes.Volumes = append(sc.Volumes.Volumes, &yaml.Volume{Source: "~/.aws/credentials", Destination: "/root/.aws/credentials", AccessMode: "ro"})
 			sc.Volumes.Volumes = append(sc.Volumes.Volumes, &yaml.Volume{Source: "~/.docdepot/tmp", Destination: "/usr/local/tomcat/tmp/"})
 		}
 
