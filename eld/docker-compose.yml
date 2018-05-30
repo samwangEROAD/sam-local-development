@@ -55,6 +55,9 @@ services:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ci/rabbitmq
     networks:
       app_net:
+        aliases:
+          - rabbitmq.test.erdmg.com
+          - rabbitmq.dev.erdmg.com
         ipv4_address: 172.19.1.64
 
   nginx:
