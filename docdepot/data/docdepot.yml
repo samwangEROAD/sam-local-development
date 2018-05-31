@@ -87,6 +87,8 @@ services:
 
   eld:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/eld
+    environment:
+      - JAVA_OPTS=-Dspring.profiles.active=local
     labels:
       docdepot.hostnames: eld-svc.dev.erdmg.com
       docdepot.tomcat: "true"
