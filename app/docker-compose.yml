@@ -9,7 +9,7 @@ services:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
       # Uncomment to enable JVM debugging on port 9009
-      #DEBUG_GLASSFISH: true
+      #DEBUG_GLASSFISH: debug
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/glassfish3-app-node:latest
     networks:
       app_net:
