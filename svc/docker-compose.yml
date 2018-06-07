@@ -8,12 +8,17 @@ services:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
       JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211 -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n
-    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/svc
+#   image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/svc:latest
+    image : svc-test:latest
+    ports: 
+      - 80:80
+      - 8080:8080
     networks:
       app_net:
         ipv4_address: 172.19.1.20
     volumes:
       - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - .//dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
 # uncomment to deploy locally built svc component war
       # - ${HOME}/eroad/application/components/ifta/ifta-war/target/ifta-war-5.0.32-SNAPSHOT.war:/usr/local/tomcat/webapps/ifta.war
 
