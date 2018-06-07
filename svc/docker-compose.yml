@@ -8,8 +8,8 @@ services:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
       JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211 -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n
-#   image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/svc:latest
-    image : svc-test:latest
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/svc:latest
+    #image : svc-test:latest
     ports: 
       - 80:80
       - 8080:8080
