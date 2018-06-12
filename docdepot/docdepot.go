@@ -176,7 +176,10 @@ func readProject() (*user.User, *project.Project) {
 
 	template, err := Asset("data/docdepot.yml")
 
-	prj := project.NewProject(&project.Context{ComposeBytes: [][]byte{template}}, nil, nil)
+	prj := project.NewProject(&project.Context{
+		ComposeBytes: [][]byte{template},
+		ProjectName: "docdepot",
+	}, nil, nil)
 
 	if err := prj.Parse(); err != nil {
 		panic(fmt.Sprintf("Failed to parse template %v : %v", template, err))
@@ -198,7 +201,7 @@ func readVersion() string {
 func rm(force bool) {
 	ctx := context.Background()
 
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.WithVersion("1.30"))
 
 	if err != nil {
 		panic(err)
