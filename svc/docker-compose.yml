@@ -19,7 +19,7 @@ services:
         ipv4_address: 172.19.1.20
     volumes:
       - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-      - ./context.xml:/usr/local/tomcat/conf/context.xml
+        #      - ./context.xml:/usr/local/tomcat/conf/context.xml
       - .//dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
 # uncomment to deploy locally built svc component war
       # - ${HOME}/eroad/application/components/ifta/ifta-war/target/ifta-war-5.0.32-SNAPSHOT.war:/usr/local/tomcat/webapps/ifta.war
