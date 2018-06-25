@@ -155,6 +155,12 @@ services:
           - rabbitmq.dev.erdmg.com
         ipv4_address: 172.19.1.64
 
+  redis:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ci/redis
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.85
+
 networks:
   docdepot:
     driver: bridge
