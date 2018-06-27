@@ -36,14 +36,32 @@ jobs:
       trigger: true
     - get: version
       params: {bump: patch}
-  - task: build
+  - task: build-darwin
     file: docdepot/build/tasks/build-docdepot.yml
     input_mapping: {repo: docdepot}
+    output_mapping: {output: output_darwin}
+    params:
+      ARCH: darwin
+  - task: build-linux
+    file: docdepot/build/tasks/build-docdepot.yml
+    input_mapping: {repo: docdepot}
+    output_mapping: {output: output_linux}
+    params:
+      ARCH: linux
+  - task: build-windows
+    file: docdepot/build/tasks/build-docdepot.yml
+    input_mapping: {repo: docdepot}
+    output_mapping: {output: output_windows}
+    params:
+      ARCH: windows
   - aggregate:
     - put: github-release
       params:
         commitish: docdepot/.git/refs/heads/master
-        globs: ['output/docdepot']
+        globs:
+        - 'output_darwin/docdepot-*'
+        - 'output_linux/docdepot-*'
+        - 'output_windows/docdepot-*'
         name: version/number
         tag: version/number
     - put: version

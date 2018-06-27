@@ -6,6 +6,9 @@ image_resource:
     repository: golang
     tag: 1.9
 
+params:
+  ARCH: unset
+
 inputs:
   - name: repo
   - name: version
