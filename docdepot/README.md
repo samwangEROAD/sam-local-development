@@ -12,11 +12,11 @@ your compose file.
 
 ## Getting started
 
-Get the latest release of **docdepot** from https://github.com/eroad/local-development/releases 
+Get the latest release of **docdepot** for your OS from https://github.com/eroad/local-development/releases 
 
 ```
-chmod +x ~/Downloads/docdepot
-mv ~/Downloads/docdepot /usr/local/bin/
+chmod +x ~/Downloads/docdepot-linux
+mv ~/Downloads/docdepot-linux /usr/local/bin/docdepot
 ```
 
 Install the **okta-awscli** binary from https://github.com/eroad/okta-aws-cli-assume-role/releases

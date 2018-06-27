@@ -6,7 +6,7 @@ pushd /go/src/docdepot
 go get -u github.com/go-bindata/go-bindata/...
 go-bindata data/...
 go get
-go install
+GOOS=${ARCH} go build
 popd
 
-cp /go/bin/docdepot output/
+find /go/src/docdepot -type f -executable -exec mv {} output/docdepot-${ARCH} \;
