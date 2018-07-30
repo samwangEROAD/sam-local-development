@@ -148,7 +148,7 @@ func generate(template string, containers []string) (string) {
 			panic("nginx container required but not found in template " + template)
 		}
 
-		nginxConfig := ""
+		nginxConfig := "proxy_buffers 4 256k; proxy_buffer_size 128k;"
 
 		for host, ip := range nginxHosts {
 			nginx.Networks.Networks[0].Aliases = append(nginx.Networks.Networks[0].Aliases, host)
