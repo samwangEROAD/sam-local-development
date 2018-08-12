@@ -170,7 +170,7 @@ services:
       docdepot:
         ipv4_address: 172.19.1.18
     volumes:
-      - ~/.m2/repository/nz/co/eroad/proof-of-service-api/0-SNAPSHOT/proof-of-service-api-0-SNAPSHOT.jar:/spring-boot/pos.jar
+      - ~/.m2/repository/nz/co/eroad/proof-of-service-api/0-SNAPSHOT/proof-of-service-api-0-SNAPSHOT-exec.jar:/spring-boot/pos.jar
 
 networks:
   docdepot:
