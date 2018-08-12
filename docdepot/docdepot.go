@@ -17,14 +17,10 @@ import (
 var app = cli.New(readVersion(), "docdepot", func(c cli.Command) { c.Usage() })
 
 func main() {
-	generateSubCommand := app.DefineSubCommand("generate", "Generates a docker compose file for the specified docdepot containers",
+	app.DefineSubCommand("generate", "Generates a docker compose file for the specified docdepot containers",
 		func(c cli.Command) {
-			fmt.Println(generate(
-				c.Flag("template").Get().(string),
-				c.Args().Strings()))
+			fmt.Println(generate(c.Args().Strings()))
 		})
-
-	generateSubCommand.DefineStringFlag("template", "~/.docdepot/docdepot.yml", "Template used to define containers")
 
 	rmSubCommand := app.DefineSubCommand("rm", "Removes all docdepot containers and networks",
 		func(c cli.Command) {
@@ -36,7 +32,7 @@ func main() {
 	app.Start()
 }
 
-func generate(template string, containers []string) (string) {
+func generate(containers []string) (string) {
 	images := []string{}
 	imagesWithTags := map[string]string{}
 
@@ -55,7 +51,7 @@ func generate(template string, containers []string) (string) {
 
 	for image, _ := range imagesWithTags {
 		if prj.ServiceConfigs.All()[image] == nil {
-			panic(fmt.Sprintf("component %v not found in template %v", image, template))
+			panic(fmt.Sprintf("component %v not found in template", image))
 		}
 	}
 
@@ -145,7 +141,7 @@ func generate(template string, containers []string) (string) {
 	if len(nginxHosts) > 0 {
 		nginx, found := prj.ServiceConfigs.Get("nginx");
 		if !found {
-			panic("nginx container required but not found in template " + template)
+			panic("nginx container required but not found in template")
 		}
 
 		nginxConfig := "proxy_buffers 4 256k; proxy_buffer_size 128k;"
