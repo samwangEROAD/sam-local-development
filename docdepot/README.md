@@ -61,7 +61,7 @@ Add your component to the **docdepot.yml** template file.
 docdepot generate portal 
 ```
 
-### Portal, built from pull request 42
+### Portal, built from pull request 1200
 ```
 docdepot generate portal:PR-1200 
 ```
