@@ -23,6 +23,7 @@ services:
     #   - .//dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
     #   - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
     #   - ./logging.properties:/usr/local/tomcat/conf/logging.properties
+    #   - .${HOME}/eroad/application/portal/portal/build/docker/conf/server.xml:/usr/local/tomcat/conf/server.xml
     ports:
       - 80:8080
       - 9999:8080
