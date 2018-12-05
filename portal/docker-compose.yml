@@ -10,7 +10,7 @@ services:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
       JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
-# Uncomment to enable JMX connectivity
+     # Uncomment to enable JMX connectivity
      # CATALINA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
     networks:
       app_net:
@@ -24,6 +24,9 @@ services:
     #   - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
     #   - ./logging.properties:/usr/local/tomcat/conf/logging.properties
     #   - .${HOME}/eroad/application/portal/portal/build/docker/conf/server.xml:/usr/local/tomcat/conf/server.xml
+    #   - ./eroad-simple-formatter.jar:/usr/local/tomcat/lib/eroad-simple-formatter.jar
+    #   - ${HOME}/eroad/portal/build/docker/bin/setenv.sh:/usr/local/tomcat/bin/setenv.sh
+
     ports:
       - 80:8080
       - 9999:8080
