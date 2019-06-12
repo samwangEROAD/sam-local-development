@@ -176,10 +176,10 @@ services:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/svc
     labels:
       docdepot.tomcat: "true"
-      docdepot.hostnames: svc.dev.erdmg.com
+      docdepot.hostnames: logbook-svc.dev.erdmg.com
     networks:
       docdepot:
-        ipv4_address: 172.19.1.69
+        ipv4_address: 172.19.1.20
 
 networks:
   docdepot:
