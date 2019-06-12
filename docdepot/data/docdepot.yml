@@ -172,6 +172,15 @@ services:
     volumes:
       - ~/.m2/repository/nz/co/eroad/proof-of-service-api/0-SNAPSHOT/proof-of-service-api-0-SNAPSHOT-exec.jar:/spring-boot/pos.jar
 
+  svc:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/development/svc
+    labels:
+      docdepot.tomcat: "true"
+      docdepot.hostnames: logbook-svc.dev.erdmg.com
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.20
+
 networks:
   docdepot:
     driver: bridge
