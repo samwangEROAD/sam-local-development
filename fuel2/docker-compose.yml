@@ -43,7 +43,7 @@ services:
         ipv4_address: 172.19.1.19
     volumes:
 #      uncomment to deploy locally built application jar
-#      - $HOME/eroad/eroad-helpers/application/components/fuel-service-v2/fuel-service-v2-service/target/fuel-service-v2-service-0-SNAPSHOT-exec.jar:/spring-boot/app.jar
+#      - $HOME/eroad/eroad-helpers/application/components/fuel-service-v2/fuel-service-v2-service/target/fuel-service-v2-service-0-SNAPSHOT-exec.jar:/spring-boot/fuelv2.jar
     ports:
       - 8080:8080
 
