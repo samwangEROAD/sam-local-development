@@ -181,6 +181,17 @@ services:
       docdepot:
         ipv4_address: 172.19.1.20
 
+  fuel-service-2:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/fuel-service-v2
+    labels:
+      docdepot.hostnames: fuel-service-v2.dev.erdmg.com
+      docdepot.tomcat: "true"
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.19
+    volumes:
+      - ~/.m2/repository//nz/co/eroad/fuel-service-v2-service/0-SNAPSHOT/fuel-service-v2-service-0-SNAPSHOT-exec.jar:/spring-boot/fuelv2.jar
+
 networks:
   docdepot:
     driver: bridge
