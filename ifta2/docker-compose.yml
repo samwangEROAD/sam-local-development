@@ -18,9 +18,9 @@ services:
       docdepot:
         ipv4_address: 172.19.1.111
     volumes:
-    - ~/.m2/repository/nz/co/eroad/tax/ifta-service-v2-app/0-SNAPSHOT/ifta-service-v2-app-0-SNAPSHOT-exec.jar:/spring-boot/iftav2.jar
-    - ~/.aws/credentials:/root/.aws/credentials:ro
-    - ~/.docdepot/tmp:/usr/local/tomcat/tmp/
+    - $HOME/.m2/repository/nz/co/eroad/tax/ifta-service-v2-app/0-SNAPSHOT/ifta-service-v2-app-0-SNAPSHOT-exec.jar:/spring-boot/iftav2.jar
+    - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    - $HOME/.docdepot/tmp:/usr/local/tomcat/tmp/
   memcached:
     image: memcached
     labels:
@@ -63,9 +63,9 @@ services:
       docdepot:
         ipv4_address: 172.19.1.101
     volumes:
-    - ~/.m2/repository/nz/co/eroad/Portal/0-SNAPSHOT/Portal-0-SNAPSHOT.war:/usr/local/tomcat/webapps/Portal.war
-    - ~/.aws/credentials:/root/.aws/credentials:ro
-    - ~/.docdepot/tmp:/usr/local/tomcat/tmp/
+    - $HOME/.m2/repository/nz/co/eroad/Portal/0-SNAPSHOT/Portal-0-SNAPSHOT.war:/usr/local/tomcat/webapps/Portal.war
+    - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    - $HOME/.docdepot/tmp:/usr/local/tomcat/tmp/
 volumes: {}
 networks:
   docdepot:
