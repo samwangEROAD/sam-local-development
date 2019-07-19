@@ -186,6 +186,8 @@ services:
     labels:
       docdepot.hostnames: fuel-service-v2.dev.erdmg.com
       docdepot.tomcat: "true"
+    environment:
+      - JAVA_OPTS=-Dspring.profiles.active=dev
     networks:
       docdepot:
         ipv4_address: 172.19.1.19
@@ -197,11 +199,13 @@ services:
     labels:
       docdepot.hostnames: ifta-service-v2.dev.erdmg.com
       docdepot.tomcat: "true"
+    environment:
+      - JAVA_OPTS=-Dspring.profiles.active=dev
     networks:
       docdepot:
-        ipv4_address: 172.19.1.21
+        ipv4_address: 172.19.1.111
     volumes:
-      - ~/.m2/repository/nz/co/eroad/ifta-service-v2-service/0-SNAPSHOT/ifta-service-v2-service-0-SNAPSHOT-exec.jar:/spring-boot/iftav2.jar
+      - ~/.m2/repository/nz/co/eroad/tax/ifta-service-v2-app/0-SNAPSHOT/ifta-service-v2-app-0-SNAPSHOT-exec.jar:/spring-boot/iftav2.jar
 
 networks:
   docdepot:
