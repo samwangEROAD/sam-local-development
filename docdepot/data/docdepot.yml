@@ -207,6 +207,19 @@ services:
     volumes:
       - ~/.m2/repository/nz/co/eroad/tax/ifta-service-v2-app/0-SNAPSHOT/ifta-service-v2-app-0-SNAPSHOT-exec.jar:/spring-boot/iftav2.jar
 
+  ruc-offroad-v2:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ruc-offroad
+    labels:
+      docdepot.hostnames: ruc-offroad.dev.erdmg.com
+      docdepot.tomcat: "true"
+    environment:
+      - JAVA_OPTS=-Dspring.profiles.active=dev
+    networks:
+      docdepot:
+        ipv4_address: 172.19.1.112
+    volumes:
+      - ~/.m2/repository/nz/co/eroad/ruc-offroad/0-SNAPSHOT/ruc-offroad-0-SNAPSHOT-exec.jar:/spring-boot/rucoffroad.jar
+
 networks:
   docdepot:
     driver: bridge
