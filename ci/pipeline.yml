@@ -1,68 +1,72 @@
 resources:
-
 - name: docdepot
   type: git
   source:
     uri: https://github.com/eroad/local-development.git
     branch: master
-    username: {{github-username}}
-    password: {{github-password}}
-    paths: ['docdepot/*']
-
+    username: ((github-username))
+    password: ((github-password))
+    paths:
+    - docdepot/*
 - name: github-release
   type: github-release
   source:
-    access_token: {{github-token}}
+    access_token: ((github-token))
     user: eroad
     repository: local-development
-
 - name: version
   type: semver
   source:
     initial_version: 1.0.0
     key: docdepot/version
     bucket: eroad-artifact-ap-southeast-2
-    access_key_id: {{aws-access-key}}
-    secret_access_key: {{aws-secret-key}}
+    access_key_id: ((aws-access-key))
+    secret_access_key: ((aws-secret-key))
     region_name: ap-southeast-2
-
 jobs:
-
 - name: build-docdepot
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: docdepot
       trigger: true
     - get: version
-      params: {bump: patch}
+      params:
+        bump: patch
   - task: build-darwin
     file: docdepot/build/tasks/build-docdepot.yml
-    input_mapping: {repo: docdepot}
-    output_mapping: {output: output_darwin}
+    input_mapping:
+      repo: docdepot
+    output_mapping:
+      output: output_darwin
     params:
       ARCH: darwin
   - task: build-linux
     file: docdepot/build/tasks/build-docdepot.yml
-    input_mapping: {repo: docdepot}
-    output_mapping: {output: output_linux}
+    input_mapping:
+      repo: docdepot
+    output_mapping:
+      output: output_linux
     params:
       ARCH: linux
   - task: build-windows
     file: docdepot/build/tasks/build-docdepot.yml
-    input_mapping: {repo: docdepot}
-    output_mapping: {output: output_windows}
+    input_mapping:
+      repo: docdepot
+    output_mapping:
+      output: output_windows
     params:
       ARCH: windows
-  - aggregate:
+  - in_parallel:
     - put: github-release
       params:
         commitish: docdepot/.git/refs/heads/master
         globs:
-        - 'output_darwin/docdepot-*'
-        - 'output_linux/docdepot-*'
-        - 'output_windows/docdepot-*'
+        - output_darwin/docdepot-*
+        - output_linux/docdepot-*
+        - output_windows/docdepot-*
         name: version/number
         tag: version/number
     - put: version
-      params: {file: version/number}
+      params:
+        file: version/number
