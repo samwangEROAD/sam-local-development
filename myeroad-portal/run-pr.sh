@@ -18,6 +18,9 @@ $(grep -ve "^$" -ve "^#"  ~/.aws/credentials \
 
 $(aws ecr get-login --no-include-email)
 
+export AWS_DEFAULT_REGION=ap-southeast-2
+export AWS_REGION=${AWS_DEFAULT_REGION}
+
 # Write ENV to .env file for docker-compose use
 echo "PR_NUMBER=$1" > .env
 
