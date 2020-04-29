@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  web:
+    image: "212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/myeroad-portal:PR-${PR_NUMBER}"
+    ports:
+      - 3000:3000
