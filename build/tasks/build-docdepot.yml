@@ -3,18 +3,20 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: golang
+    repository: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/golang
     tag: 1.9
 
+    aws_access_key_id: ((aws-access-key))
+    aws_secret_access_key: ((aws-secret-key))
 params:
   ARCH: unset
 
 inputs:
-  - name: repo
-  - name: version
+- name: repo
+- name: version
 
 outputs:
-  - name: output
+- name: output
 
 run:
   path: repo/build/scripts/build-docdepot.sh
