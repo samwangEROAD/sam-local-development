@@ -1,33 +1,33 @@
-version: "2.0"
+version: '2.0'
 services:
   postgis:
-    image: mdillon/postgis:11-alpine
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/mdillon/postgis:11-alpine
     restart: always
     networks:
-      - docdepot
+    - docdepot
 
   postgres:
     restart: always
-    image: mdillon/postgis:11-alpine 
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/mdillon/postgis:11-alpine
     networks:
       docdepot:
         aliases:
         - ruc-offroad-rds.dev.erdmg.com
     ports:
-      - "5432:5432"
+    - 5432:5432
     environment:
-      - "POSTGRES_PASSWORD=WeAreAwesome!"
-      - "POSTGRES_USER=offroad"
-      - "POSTGRES_DB=rucoffroad"
+    - POSTGRES_PASSWORD=WeAreAwesome!
+    - POSTGRES_USER=offroad
+    - POSTGRES_DB=rucoffroad
 
   dockerize:
-    image: jwilder/dockerize
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/jwilder/dockerize
     links:
-      - postgres
-      - postgis
+    - postgres
+    - postgis
     command: sh -c "while :; do sleep 8s; done"
     networks:
-      - docdepot
+    - docdepot
 
   ruc-offroad:
     depends_on:
@@ -35,32 +35,31 @@ services:
     - postgres
     environment:
     - JAVA_OPTS=-Dspring.profiles.active=dev -Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n
-    - 'CATALINA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000
-      -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false'
+    - 'CATALINA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false'
     - AWS_DYNAMODB_TABLE_PROPERTY=devConfigurationDynamoTableProperties
     - AWS_REGION=ap-southeast-2
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/ruc-offroad
     restart: always
     tty: true
     ports:
-      - 8080:8080
-      - 5005:5005
+    - 8080:8080
+    - 5005:5005
     networks:
       docdepot:
         ipv4_address: 172.19.1.112
     labels:
-      docdepot: "true"
+      docdepot: 'true'
       docdepot.hostnames: ruc-offroad.dev.erdmg.com
-      docdepot.tomcat: "true"
+      docdepot.tomcat: 'true'
     volumes:
     - $HOME/.m2/repository/nz/co/eroad/ruc-offroad/0-SNAPSHOT/ruc-offroad-0-SNAPSHOT-exec.jar:/spring-boot/app.jar
     - $HOME/.aws/credentials:/root/.aws/credentials:ro
     - ./tmp:/spring-boot/tmp
 
   memcached:
-    image: memcached
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/memcached
     labels:
-      docdepot: "true"
+      docdepot: 'true'
     networks:
       docdepot:
         ipv4_address: 172.19.1.100

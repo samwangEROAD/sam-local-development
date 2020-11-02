@@ -16,7 +16,7 @@ services:
       app_net:
         ipv4_address: 172.19.1.17
     links:
-      - memcached:memcached
+    - memcached:memcached
     volumes:
 #      uncomment to deploy locally built portal war
 #      - ./dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
@@ -24,10 +24,10 @@ services:
 #      - ./logging.properties:/usr/local/tomcat/conf/logging.properties
 #      - $HOME/eroad/eroad-helpers/application/portal/portal/target/Portal-0-SNAPSHOT:/usr/local/tomcat/webapps/Portal
     ports:
-      - 80:8080
-      - 9999:8080
-      - 8000:8000
-      - 9000:9000
+    - 80:8080
+    - 9999:8080
+    - 8000:8000
+    - 9000:9000
 
   fuel-service-v2:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/fuel-service-v2
@@ -45,21 +45,21 @@ services:
 #      uncomment to deploy locally built application jar
 #      - $HOME/eroad/eroad-helpers/application/components/fuel-service-v2/fuel-service-v2-service/target/fuel-service-v2-service-0-SNAPSHOT-exec.jar:/spring-boot/fuelv2.jar
     ports:
-      - 8080:8080
+    - 8080:8080
 
   memcached:
-    image: memcached
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/memcached
     networks:
       app_net:
         ipv4_address: 172.19.1.99
 
   nginx:
-    image: nginx
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/nginx
     networks:
       app_net:
         ipv4_address: 172.19.1.2
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+    - ./default.conf:/etc/nginx/conf.d/default.conf
 
 networks:
   app_net:
@@ -67,4 +67,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.19.1.0/24
+      - subnet: 172.19.1.0/24
