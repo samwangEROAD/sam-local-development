@@ -18,4 +18,10 @@ web_1  | [OK] Listening on http://localhost:3000
 web_1  | ----------------------------------------------
 ```
 
+You should also add `127.0.0.1 localhost.eroad.com` to the end of `/etc/hosts` file, then you can visit myeroad with `http://localhost.eroad.com:3000` in your browser.
+
 If you cannot run `run-pr.sh` as executable, please run `chmod +x ./run-pr.sh` in `myeroad-portal` and try again.
+
+If you get the error, then comment the 44th line and uncomment the 43rd line in the file run-pr.sh.
+
+```Error: Cannot perform an interactive login from a non TTY device```
