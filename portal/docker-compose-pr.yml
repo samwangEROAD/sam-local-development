@@ -1,0 +1,27 @@
+version: "3.0"
+services:
+  memcached:
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/memcached
+    networks:
+      depot:
+  portal:
+    depends_on: [memcached]
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT}
+      AWS_REGION: ${AWS_REGION}
+      AWS_DYNAMODB_TABLE_PROPERTY: ${AWS_DYNAMODB_TABLE_PROPERTY}
+      JAVA_OPTS: '-DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
+    image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal:${PR}
+    ports:
+      - 80:8080
+      - 5005:5005
+    networks:
+      depot:
+    links:
+      - memcached:memcached
+    volumes:
+      - ~/.aws/credentials:/root/.aws/credentials:ro
+      - ./dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
+
+networks:
+  depot:
