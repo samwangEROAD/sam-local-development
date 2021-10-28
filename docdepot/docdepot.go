@@ -107,7 +107,7 @@ func generate(containers []string) (string) {
 				sc.Environment[javaOptsIndex] += " -Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n"
 			}
 
-			sc.Environment = append(sc.Environment, "CATALINA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false")
+			sc.Environment = append(sc.Environment, "CATALINA_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false")
 		}
 
 		if sc.Labels["docdepot.glassfish"] == "true" || sc.Labels["docdepot.tomcat"] == "true" {
