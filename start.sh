@@ -19,5 +19,4 @@ $(grep -ve "^$" -ve "^#"  ~/.aws/credentials \
 export AWS_DEFAULT_REGION=ap-southeast-2
 export AWS_REGION=${AWS_DEFAULT_REGION}
 export DEPOT_ENVIRONMENT=${DEPOT_ENVIRONMENT:=dev}
-$(aws ecr get-login --no-include-email)
 docker-compose up
