@@ -33,7 +33,7 @@ export PR=PR-${PR_NUMBER}
 export ENVIRONMENT=${ENVIRONMENT:=test}
 export AWS_REGION=${AWS_REGION:=ap-southeast-2}
 export AWS_DYNAMODB_TABLE_PROPERTY=${ENVIRONMENT}ConfigurationDynamoTableProperties
-export DYNAMIC_CONFIG_FILE=${DYNAMIC_CONFIG_FILE:=./dynamicconfig.properties}
+export DYNAMIC_CONFIG_FILE=${DYNAMIC_CONFIG_FILE:=./dynamicconfig-pr.properties}
 
 cd "$(dirname "$0")"
 
