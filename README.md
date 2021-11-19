@@ -55,6 +55,9 @@ When building docker images locally base images often are pulled from our EROAD 
 directly from docker hub. This is now the expected case as docker hub have introducing rate limiting (and we see
 errors if we pull images too frequently from docker hub and exceed their rate limit).
 
+Refer to (eroad/ecr-mirror)[https://github.com/eroad/ecr-mirror] for details on how public third party images are
+synced to our ECR registry.  
+
 #### Example - Pulling `amazoncorretto:17-alpine` from docker hub
 ```bash
 FROM amazoncorretto:17-alpine
@@ -71,6 +74,9 @@ We pull public third party docker images via ECR to avoid issues with docker hub
 ## Steps for using ECR
 
 To use ECR we need to authenticate with the ECR docker registry. The following are the steps for this.
+
+Note that [get-login.sh](https://github.com/eroad/local-development/blob/master/get-login.sh) can be used
+to automate these steps.
 
 ### Step 1: gimme-aws-creds
 
@@ -104,7 +110,7 @@ Note that the Account value here is the `account-id` we use to login to ECR.
 
 ### Step 3: Docker login to ECR
 
-Perform docker login to ERC using our AWS credentials. To do so execute a command like the one below making sure we 
+Perform `docker login` to ERC using our AWS credentials. To do so execute a command like the one below making sure we 
 change the `account-id` with your own AWS accountId (12 digit integer - shown in output of `aws sts get-caller-identity`).
 
 - change the `account-id` in the command below with your own AWS accountId
