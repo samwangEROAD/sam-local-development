@@ -21,7 +21,7 @@ services:
       - memcached:memcached
     volumes:
       - ~/.aws/credentials:/root/.aws/credentials:ro
-      - ./dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
+      - ./dynamicconfig-pr.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
 
 networks:
   depot:
