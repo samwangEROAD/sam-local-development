@@ -55,7 +55,7 @@ When building docker images locally base images often are pulled from our EROAD 
 directly from docker hub. This is now the expected case as docker hub have introducing rate limiting (and we see
 errors if we pull images too frequently from docker hub and exceed their rate limit).
 
-Refer to (eroad/ecr-mirror)[https://github.com/eroad/ecr-mirror] for details on how public third party images are
+Refer to [eroad/ecr-mirror](https://github.com/eroad/ecr-mirror) for details on how public third party images are
 synced to our ECR registry.  
 
 #### Example - Pulling `amazoncorretto:17-alpine` from docker hub
