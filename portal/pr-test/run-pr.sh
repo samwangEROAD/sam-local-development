@@ -41,7 +41,7 @@ cd "$(dirname "$0")"
 # if you encounter an error from the aws cli saying that the `get-login-password` command is invalid then an older version of the aws-cli is being used
 # Below is for old version of aws-cli
 #$(aws ecr get-login --no-include-email --region ap-southeast-2)
-aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com
+# aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 212136148152.dkr.ecr.ap-southeast-2.amazonaws.com
 
 docker-compose --file ./docker-compose-pr.yml rm -f
 docker-compose --file ./docker-compose-pr.yml up --build --force-recreate

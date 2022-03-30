@@ -4,7 +4,7 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_DYNAMODB_TABLE_PROPERTY: ${DEPOT_ENVIRONMENT}ConfigurationDynamoTableProperties
-      AWS_REGION: ap-southeast-2
+      AWS_REGION: ${AWS_REGION}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
       JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211 -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n
@@ -18,11 +18,14 @@ services:
       app_net:
         ipv4_address: 172.19.1.20
     volumes:
+    - ./initialize_context.sh:/usr/local/bin/initialize_context.sh
     - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    - ./postgres_driver.jar:/usr/local/tomcat/lib/postgres_driver.jar
         #      - ./context.xml:/usr/local/tomcat/conf/context.xml
     - .//dynamicconfig.properties:/usr/local/tomcat/tmp/dynamicconfig.properties
 # uncomment to deploy locally built svc component war
       # - ${HOME}/eroad/application/components/ifta/ifta-war/target/ifta-war-5.0.32-SNAPSHOT.war:/usr/local/tomcat/webapps/ifta.war
+    - ${LOCAL_CODE_BASE}/ifta/ifta-war/target/ifta-war-0-SNAPSHOT.war:/usr/local/tomcat/webapps/ifta.war
 
   memcached:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/memcached
@@ -33,15 +36,20 @@ services:
   portal:
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_DYNAMODB_TABLE_PROPERTY: devConfigurationDynamoTableProperties
-      AWS_REGION: ap-southeast-2
+      AWS_DYNAMODB_TABLE_PROPERTY: ${DEPOT_ENVIRONMENT}ConfigurationDynamoTableProperties
+      AWS_REGION: ${AWS_REGION}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
-      JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211
+      JAVA_OPTS: -DMEMCACHED_NODE_01=memcached:11211 -DMEMCACHED_NODE_02=memcached:11211 -Xdebug -Xrunjdwp:transport=dt_socket,address=7000,server=y,suspend=n
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/portal
+    ports:
+      - 8088:8080
+      - 7000:7000
     networks:
       app_net:
         ipv4_address: 172.19.1.95
+    volumes:
+      - /home/sam.wang@Eroad.local/eroad/application/portal/portal/target/Portal-0-SNAPSHOT.war:/usr/local/tomcat/webapps/Portal.war
 
   nginx:
     image: 212136148154.dkr.ecr.ap-southeast-2.amazonaws.com/mirrored/docker.io/library/nginx
@@ -50,6 +58,7 @@ services:
         aliases:
         - svc.dev.erdmg.com
         - ifta-svc.dev.erdmg.com
+        - ifta-svc.napp.erdmg.com
         - journey-svc.dev.erdmg.com
         - off-highway-svc.dev.erdmg.com
         ipv4_address: 172.19.1.2
